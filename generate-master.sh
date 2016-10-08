@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-if [[ -z $1 || -z $2 || -z $3 ]]; then
-    printf "Usage: generate-master.sh SECUREDIR NAME EMAIL\n"
+if [[ -z $1 || -z $2 || "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Usage: generate-master.sh NAME EMAIL [SECUREDIR]\n"
     exit 1
 fi
 
-SECUREDIR=$1
-key_name=$2
-key_email=$3
+key_name=$1
+key_email=$2
+SECUREDIR=${3:-secure}
 
 if [[ ! -d $SECUREDIR ]]; then
     printf "\`%s' does not exist\n" "$SECUREDIR"
@@ -39,7 +39,5 @@ gpg --command-fd 0 --status-fd 2 --no-tty \
 6
 2048
 5y
-y
-y
 save
 EOF

@@ -3,21 +3,21 @@ set -e
 
 # Check out https://github.com/coruus/osx-tmpfs/blob/master/main.go for more
 
-if [[ $(id -u) != 0 || -z $SUDO_USER || -z $SUDO_UID || -z $SUDO_GID ]]; then
-    printf "Must be run via sudo\n"
+if [[ "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Usage: create-secure-dir.sh [NAME]\n"
     exit 1
 fi
 
-if [[ -z $1 ]]; then
-    printf "Usage: create-secure-dir.sh MOUNTPOINT\n"
+if [[ $(id -u) != 0 || -z $SUDO_USER || -z $SUDO_UID || -z $SUDO_GID ]]; then
+    printf "Must be run via sudo\n"
     exit 1
 fi
 
 undo=""
 trap 'eval "$undo"' ERR EXIT
 
-volname=$1
-mountpoint="$PWD/$volname.noindex"
+volname=${1:-secure}
+mountpoint="$PWD/$volname"
 
 printf "Creating ramdisk\n"
 ramdisk_path=$(hdik -nomount ram://2048)
@@ -59,9 +59,15 @@ chmod -P -R -E "$mountpoint" <<<"$acl"
 printf "Telling Spotlight to not index the volume\n"
 mdutil -i off "$mountpoint"
 
+printf "%s" "$ramdisk_path" > "$mountpoint/ramdisk_path"
+cat > "$mountpoint/CLEANUP" <<EOF
+# Run the following when you're done:
+
+sudo diskutil unmount '$mountpoint' && \
+rmdir '$mountpoint' && \
+diskutil eject '$ramdisk_path'
+EOF
+
 undo=""
 printf "\nSecure directory created at \`%s'.\n" "$mountpoint"
-printf "# Run the following when you're done:\n\n" | tee -a "$mountpoint/CLEANUP"
-printf "sudo diskutil unmount '%s'&&\\\\\n" "$mountpoint" | tee -a "$mountpoint/CLEANUP"
-printf "rmdir '%s'&&\\\\\n" "$mountpoint" | tee -a "$mountpoint/CLEANUP"
-printf "diskutil eject '%s'\n" "$ramdisk_path" | tee -a "$mountpoint/CLEANUP"
+printf "The directory can be destroyed with ./destroy-secure-dir.sh\n"
