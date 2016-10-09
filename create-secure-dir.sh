@@ -58,7 +58,7 @@ acl="$acl,read,write,execute,append,file_inherit,directory_inherit"
 chmod -P -R -E "$mountpoint" <<<"$acl"
 
 printf "Telling Spotlight to not index the volume\n"
-mdutil -i off "$mountpoint"
+mdutil -Ed "$mountpoint"
 
 printf "%s" "$ramdisk_path" > "$mountpoint/ramdisk_path"
 cat > "$mountpoint/CLEANUP" <<EOF
