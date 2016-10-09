@@ -1,6 +1,8 @@
 # GPG Masterkey management toolset #
 
-These tools automate the creation of GPG masterkeys.
+These tools automate the creation of GPG masterkeys.  
+"GnuPG modern" is required for these tools to work
+(`brew install homebrew/versions/gnupg21`).
 
 ### `create-secure-disk.sh` ###
 

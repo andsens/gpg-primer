@@ -19,5 +19,5 @@ fi
 export GNUPGHOME="$SECUREDIR/gnupg-home"
 (umask 077; mkdir -p "$GNUPGHOME")
 
-gpg --import "$BACKUPDIR/$key_id.public.asc"
-gpg --import "$BACKUPDIR/$key_id.private.asc"
+gpg2 --import "$BACKUPDIR/$key_id.public.asc"
+gpg2 --import "$BACKUPDIR/$key_id.private.asc"

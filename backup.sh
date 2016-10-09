@@ -21,16 +21,16 @@ BACKUPDIR="$SECUREDIR/backup"
 (umask 077; mkdir -p "$BACKUPDIR")
 
 printf "Backing up private keys\n"
-gpg --armor --output "$BACKUPDIR/$key_id.private.asc" --export-secret-keys "$key_id"
+gpg2 --armor --output "$BACKUPDIR/$key_id.private.asc" --export-secret-keys "$key_id"
 
 printf "Backing up public keys\n"
-gpg --armor --output "$BACKUPDIR/$key_id.public.asc" --export "$key_id"
+gpg2 --armor --output "$BACKUPDIR/$key_id.public.asc" --export "$key_id"
 
 
 printf "Generating revocation certificate\n"
 revcert_path="$BACKUPDIR/$key_id-revocation-certificate.asc"
 [[ -e "$revcert_path" ]] && mv "$revcert_path" "$revcert_path.bak"
-gpg --command-fd 0 --status-fd 2 --no-tty \
+gpg2 --command-fd 0 --status-fd 2 --no-tty \
     --armor --output "$BACKUPDIR/$key_id-revocation-certificate.asc" \
     --gen-revoke "$key_id" 2>/dev/null << EOF
 y
