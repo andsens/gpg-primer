@@ -28,7 +28,7 @@ Key-Length: 4096
 Key-Usage: ,
 Name-Real: $key_name
 Name-Email: $key_email
-Expire-Date: 0
+Expire-Date: 1y
 Subkey-Type: RSA
 Subkey-Length: 2048
 Subkey-Usage: encrypt
