@@ -60,3 +60,13 @@ Deleting the mountpoint
 Ejecting the disk
 Disk /dev/disk2 ejected
 ```
+
+### Setting up SSH auth ###
+
+Get your public SSH key with:
+```sh
+gpg2 --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
+```
+Add it to wherever you want to authenticate with your GPG authentication key.
+
+Check out [SETUP.md](SETUP.md) on how to get the gpg-agent running on macOS.

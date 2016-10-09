@@ -1,6 +1,8 @@
 # macOS Sierra gpg agent setup #
 
-```
+## Software installation ##
+
+```sh
 brew tap homebrew/version
 brew install homebrew/versions/gnupg21 pinentry-mac
 clone git@github.com:andsens/gpg-automation gpg
@@ -8,7 +10,7 @@ clone git@github.com:andsens/gpg-automation gpg
 ```
 
 ## `$HOME/.gnupg/gpg-agent.conf` ##
-```
+```sh
 enable-ssh-support
 default-cache-ttl 600
 max-cache-ttl 7200
@@ -17,7 +19,7 @@ no-detach
 ```
 
 ## rc file ##
-```
+```sh
 SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 ```
 
