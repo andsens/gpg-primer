@@ -71,3 +71,17 @@ gpg2 --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
 ```
 Add it to wherever you want to authenticate with your GPG authentication key.
 
+### GitHub commit signing ###
+
+Export your public key with:
+```sh
+gpg2 --export E22FE7692F473FA12F2BAB164046979C50C10E97
+```
+
+And paste it into into the GPG field on https://github.com/settings/keys
+
+### git config ###
+
+* `commit.gpgSign = true`: Always sign commits
+* `push.gpgSign = if-asked`: Enable siging of pushes
+* `gpg.program = gpg2`: ... instead of `gpg`
