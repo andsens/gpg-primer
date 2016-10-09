@@ -2,6 +2,7 @@
 set -e
 
 if [[ -z $1 || -z $2 || "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Generate a GPG master and encryption subkey\n\n"
     printf "Usage: generate-master.sh NAME EMAIL [SECUREDIR]\n"
     exit 1
 fi

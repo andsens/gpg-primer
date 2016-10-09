@@ -2,6 +2,7 @@
 set -e
 
 if [[ -z $1 || "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Restore a GPG key that was backed up by backup.sh\n\n"
     printf "Usage: restore.sh KEYID [SECUREDIR] [BACKUPDIR]\n"
     exit 1
 fi

@@ -2,6 +2,7 @@
 set -e
 
 if [[ -z $1 || "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Backup your GPG key\n\n"
     printf "Usage: backup.sh KEYID [SECUREDIR] [BACKUPDIR]\n"
     exit 1
 fi

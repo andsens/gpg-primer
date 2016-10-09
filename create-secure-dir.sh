@@ -4,6 +4,7 @@ set -e
 # Check out https://github.com/coruus/osx-tmpfs/blob/master/main.go for more
 
 if [[ "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Create a temporary secure directory for sensitive files\n\n"
     printf "Usage: create-secure-dir.sh [NAME]\n"
     exit 1
 fi

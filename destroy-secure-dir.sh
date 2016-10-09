@@ -2,6 +2,7 @@
 set -e
 
 if [[ "$1" == '-h' || "$1" == '--help' ]]; then
+    printf "Remove a directory created by create-secure-dir.sh\n\n"
     printf "Usage: destroy-secure-dir.sh [MOUNTPOINT]\n"
     exit 1
 fi
