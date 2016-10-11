@@ -41,3 +41,4 @@ It is very likely that I have lost access to the private key.
 y
 EOF
 [[ -e "$revcert_path.bak" ]] && rm "$revcert_path.bak"
+exit 0
