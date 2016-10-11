@@ -12,10 +12,7 @@ clone git@github.com:andsens/gpg-automation gpg
 ## `$HOME/.gnupg/gpg-agent.conf` ##
 ```sh
 enable-ssh-support
-default-cache-ttl 600
-max-cache-ttl 7200
 pinentry-program /usr/local/bin/pinentry-mac
-no-detach
 ```
 
 ## rc file ##
