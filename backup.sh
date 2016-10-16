@@ -21,6 +21,7 @@ export GNUPGHOME="$SECUREDIR/gnupg-home"
 
 printf "Backing up private keys\n"
 gpg2 --armor --output "$BACKUPDIR/$key_id.private.asc" --export-secret-keys "$key_id"
+gpg2 --armor --output "$BACKUPDIR/$key_id.private-subkeys.asc" --export-secret-subkeys "$key_id"
 
 printf "Backing up public keys\n"
 gpg2 --armor --output "$BACKUPDIR/$key_id.public.asc" --export "$key_id"
