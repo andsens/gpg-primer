@@ -9,7 +9,7 @@ fi
 
 key_id=$1
 SECUREDIR=${2:-secure}
-BACKUPDIR=${3:-secure/backup}
+BACKUPDIR=${3:-$SECUREDIR/backup}
 
 if [[ ! -d $SECUREDIR ]]; then
     printf "\`%s' does not exist\n" "$SECUREDIR"
@@ -17,7 +17,6 @@ if [[ ! -d $SECUREDIR ]]; then
 fi
 
 export GNUPGHOME="$SECUREDIR/gnupg-home"
-BACKUPDIR="$SECUREDIR/backup"
 (umask 077; mkdir -p "$BACKUPDIR")
 
 printf "Backing up private keys\n"
