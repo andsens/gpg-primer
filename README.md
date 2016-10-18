@@ -7,7 +7,7 @@ and includes major improvements (but no deep macOS integration) with
 `brew install homebrew/versions/gnupg21`
 (check out [the notes on how to get gpg21 set up](SETUP.md)).
 
-### Walkthrough ###
+## Walkthrough ##
 
 ```sh
 # Create a secure directory that GnuPG can work in
@@ -64,6 +64,8 @@ Ejecting the disk
 Disk /dev/disk2 ejected
 ```
 
+## Other tools ##
+
 ### Setting up SSH auth ###
 
 Check out [SETUP.md](SETUP.md) on how to get the gpg-agent running on macOS.
@@ -91,3 +93,15 @@ And paste it into into the GPG field on https://github.com/settings/keys
 * `commit.gpgSign = true`: Always sign commits
 * `push.gpgSign = if-asked`: Enable siging of pushes
 * `gpg.program = gpg2`: ... instead of `gpg`
+
+### Fallback private key ###
+
+For DB editors that do not support GPG, add a restricted normal private key auth  
+`$HOME/.ssh/authorized_keys`
+```
+no-pty,no-X11-forwarding,permitopen="127.0.0.1:5432",command="/bin/echo do-not-send-commands" ssh-rsa private_key jd+postgres-only@example.com
+```
+
+## Further resources ##
+
+* https://blog.josefsson.org/2014/06/23/offline-gnupg-master-key-and-subkeys-on-yubikey-neo-smartcard/

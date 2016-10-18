@@ -43,4 +43,3 @@ SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 # Further resources #
 
 * https://www.rempe.us/blog/yubikey-gnupg-2-1-and-ssh/
-* https://blog.josefsson.org/2014/06/23/offline-gnupg-master-key-and-subkeys-on-yubikey-neo-smartcard/
