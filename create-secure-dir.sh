@@ -62,7 +62,8 @@ mdutil -Ed "$mountpoint"
 
 printf "%s" "$ramdisk_path" > "$mountpoint/ramdisk_path"
 cat > "$mountpoint/CLEANUP" <<EOF
-# Run the following when you're done:
+# If destroy-secure-dir.sh does not work,
+# these are the commands you need to run:
 
 sudo diskutil unmount '$mountpoint' && \\
 rmdir '$mountpoint' && \\
