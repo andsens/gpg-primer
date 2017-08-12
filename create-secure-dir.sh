@@ -38,7 +38,7 @@ $undo"
 
 chown "$SUDO_UID":"$SUDO_GID" "$mountpoint"
 
-printf "Mounting volume\n" "$mountpoint"
+printf "Mounting volume to %s\n" "$mountpoint"
 mount_hfs -u "$SUDO_UID" -m 700 -o noatime,nosuid,nobrowse "$ramdisk_path" "$mountpoint"
 undo="diskutil unmount \"$mountpoint\"
 $undo"
