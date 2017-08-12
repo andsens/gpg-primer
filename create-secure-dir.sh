@@ -64,8 +64,8 @@ printf "%s" "$ramdisk_path" > "$mountpoint/ramdisk_path"
 cat > "$mountpoint/CLEANUP" <<EOF
 # Run the following when you're done:
 
-sudo diskutil unmount '$mountpoint' && \
-rmdir '$mountpoint' && \
+sudo diskutil unmount '$mountpoint' && \\
+rmdir '$mountpoint' && \\
 diskutil eject '$ramdisk_path'
 EOF
 
