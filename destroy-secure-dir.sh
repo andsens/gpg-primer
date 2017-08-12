@@ -16,7 +16,7 @@ mountpoint=${1:-secure}
 ramdisk_path=$(cat "$mountpoint/ramdisk_path")
 
 printf "Unmounting the volume\n"
-diskutil unmount "$mountpoint"
+umount "$mountpoint"
 
 printf "Deleting the mountpoint\n"
 rmdir "$mountpoint"
