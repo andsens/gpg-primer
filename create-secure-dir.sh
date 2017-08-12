@@ -43,6 +43,10 @@ mount_hfs -u "$SUDO_UID" -m 700 -o noatime,nosuid,nobrowse "$ramdisk_path" "$mou
 undo="umount \"$mountpoint\"
 $undo"
 
+printf "Prevent file system event storage\n"
+mkdir "$mountpoint/.fseventsd"
+touch "$mountpoint/.fseventsd/no_log"
+
 printf "Setting permissions on mountpoint\n"
 chmod -P -R go-rwx "$mountpoint"
 chflags -P -R -v -v hidden "$mountpoint"
