@@ -46,15 +46,16 @@ $undo"
 printf "Setting permissions on mountpoint\n"
 chmod -P -R go-rwx "$mountpoint"
 chflags -P -R -v -v hidden "$mountpoint"
-acl="user:$SUDO_USER:allow delete,readattr,writeattr"
-acl="$acl,readextattr,writeextattr,readsecurity,writesecurity"
-acl="$acl,chown,list,search,add_file,add_subdirectory,delete_child"
-acl="$acl,read,write,execute,append,file_inherit,directory_inherit"
-acl="$acl
-everyone:deny delete,readattr,writeattr"
-acl="$acl,readextattr,writeextattr,readsecurity,writesecurity"
-acl="$acl,chown,list,search,add_file,add_subdirectory,delete_child"
-acl="$acl,read,write,execute,append,file_inherit,directory_inherit"
+acl=$(cat <<EOA
+user:$SUDO_USER:allow delete,readattr,writeattr,readextattr,writeextattr,\
+readsecurity,writesecurity,chown,list,search,add_file,add_subdirectory,\
+delete_child,read,write,execute,append,file_inherit,directory_inherit
+everyone:deny delete,readattr,writeattr,\
+readextattr,writeextattr,readsecurity,writesecurity,\
+chown,list,search,add_file,add_subdirectory,delete_child,\
+read,write,execute,append,file_inherit,directory_inherit
+EOA
+)
 chmod -P -R -E "$mountpoint" <<<"$acl"
 
 printf "Telling Spotlight to not index the volume\n"
