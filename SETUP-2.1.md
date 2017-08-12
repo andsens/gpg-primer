@@ -1,11 +1,13 @@
-# macOS Sierra gpg agent setup #
+# macOS Sierra gpg 2.1 setup #
+
+In order to install GPG 2.1 on macOS and get it running with SSH only a few
+things are required:
 
 ## Software installation ##
-
+Install `gnupg` and `pinentry-mac`.  
+`pinentry-mac` is used to prompt for your smartcard PIN.
 ```sh
 brew install gnupg pinentry-mac
-git clone git@github.com:andsens/gpg-automation gpg
-# Check README for a full walkthrough
 ```
 
 ## `$HOME/.gnupg/gpg-agent.conf` ##
@@ -14,7 +16,7 @@ enable-ssh-support
 pinentry-program /usr/local/bin/pinentry-mac
 ```
 
-## rc file ##
+## rc file (zsh, bash etc.) ##
 ```sh
 SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 ```
@@ -39,6 +41,12 @@ SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 </plist>
 ```
 
-# Further resources #
-
-* https://www.rempe.us/blog/yubikey-gnupg-2-1-and-ssh/
+## `$HOME/.gnupg/scdaemon.conf` ##
+Disable the internal CCID driver.  
+On some systems this driver does not work and you will have to wait for it to
+time out before the smartcard daemon falls back to other drivers.  
+You should try running without this first, but if logging in via SSH or signing
+commits takes ages, try this workaround.
+```
+disable-ccid
+```
