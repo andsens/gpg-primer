@@ -57,11 +57,11 @@ $ ./generate-master.sh 'John Doe' 'jd@example.com'
 Generating master key and encryption subkey for "John Doe" <jd@example.com>
 Key ID is E22FE7692F473FA12F2BAB164046979C50C10E97
 
+# Make sure there is no gpg-agent running
+$ gpgconf --kill gpg-agent
+
 # Change the GnuPG home dir, so that you can interact with the keys you just created
 $ export GNUPGHOME=$PWD/secure/gnupg-home
-
-# Make sure gpg-agent uses the new home dir
-$ killall gpg-agent
 
 # Add a photo to your key, copy the encryption key to your smartcard
 # and sign the authentication & signing keys with your master key
