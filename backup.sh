@@ -7,6 +7,13 @@ if [[ -z $1 || "$1" == '-h' || "$1" == '--help' ]]; then
     exit 1
 fi
 
+function log {
+    local msg="\e[34m${1}%s\e[0m\n"
+    shift
+    # shellcheck disable=SC2059
+    printf "$msg" "$@"
+}
+
 key_id=$1
 SECUREDIR=${2:-secure}
 BACKUPDIR=${3:-$SECUREDIR/backup}
@@ -19,15 +26,15 @@ fi
 export GNUPGHOME="$SECUREDIR/gnupg-home"
 (umask 077; mkdir -p "$BACKUPDIR")
 
-printf "Backing up private keys\n"
+log "Backing up private keys"
 gpg2 --armor --output "$BACKUPDIR/$key_id.private.asc" --export-secret-keys "$key_id"
 gpg2 --armor --output "$BACKUPDIR/$key_id.private-subkeys.asc" --export-secret-subkeys "$key_id"
 
-printf "Backing up public keys\n"
+log "Backing up public keys"
 gpg2 --armor --output "$BACKUPDIR/$key_id.public.asc" --export "$key_id"
 
 
-printf "Generating revocation certificate\n"
+log "Generating revocation certificate"
 revcert_path="$BACKUPDIR/$key_id-revocation-certificate.asc"
 [[ -e "$revcert_path" ]] && mv "$revcert_path" "$revcert_path.bak"
 gpg2 --command-fd 0 --status-fd 2 --no-tty \

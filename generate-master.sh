@@ -7,6 +7,13 @@ if [[ -z $1 || -z $2 || "$1" == '-h' || "$1" == '--help' ]]; then
     exit 1
 fi
 
+function log {
+    local msg="\e[34m${1}%s\e[0m\n"
+    shift
+    # shellcheck disable=SC2059
+    printf "$msg" "$@"
+}
+
 key_name=$1
 key_email=$2
 SECUREDIR=${3:-secure}
@@ -19,7 +26,7 @@ fi
 export GNUPGHOME="$SECUREDIR/gnupg-home"
 (umask 077; mkdir -p "$GNUPGHOME")
 
-printf 'Generating master key and encryption subkey for "%s" <%s>\n' "$key_name" "$key_email"
+log 'Generating master key and encryption subkey for "%s" <%s>' "$key_name" "$key_email"
 gpg_output=$(gpg2 --command-fd 0 --status-fd 2 --no-tty \
     --gen-key --batch 2>&1 << EOF
 %no-protection
@@ -36,4 +43,4 @@ Subkey-Usage: encrypt
 EOF
 )
 key_id=$(sed -n 's/^\[GNUPG:\] KEY_CREATED [PB] \([A-F0-9]\{40\}\)$/\1/p' <<<"$gpg_output")
-printf "Key ID is %s\n" "$key_id"
+log "Key ID is %s" "$key_id"

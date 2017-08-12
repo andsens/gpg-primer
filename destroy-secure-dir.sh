@@ -12,14 +12,21 @@ if [[ $(id -u) != 0 ]]; then
     exit 1
 fi
 
+function log {
+    local msg="\e[34m${1}%s\e[0m"
+    shift
+    # shellcheck disable=SC2059
+    printf "$msg" "$@"
+}
+
 mountpoint=${1:-secure}
 ramdisk_path=$(cat "$mountpoint/ramdisk_path")
 
-printf "Unmounting the volume\n"
+log "Unmounting the volume\n"
 umount "$mountpoint"
 
-printf "Deleting the mountpoint\n"
+log "Deleting the mountpoint\n"
 rmdir "$mountpoint"
 
-printf "Ejecting the disk\n"
+log "Ejecting the disk\n"
 diskutil eject "$ramdisk_path"
