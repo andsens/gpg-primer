@@ -3,9 +3,8 @@
 ## Software installation ##
 
 ```sh
-brew tap homebrew/version
-brew install homebrew/versions/gnupg21 pinentry-mac
-clone git@github.com:andsens/gpg-automation gpg
+brew install gnupg pinentry-mac
+git clone git@github.com:andsens/gpg-automation gpg
 # Check README for a full walkthrough
 ```
 

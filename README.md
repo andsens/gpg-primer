@@ -4,8 +4,8 @@ These tools automate the creation of GPG masterkeys.
 The only dependency is the GPG Suite from [gpgtools.org](https://gpgtools.org/).
 Alternatively you can install "GnuPG modern", which is the 2.1 version
 and includes major improvements (but no deep macOS integration) with
-`brew install homebrew/versions/gnupg21`
-(check out [the notes on how to get gpg21 set up](SETUP.md)).
+`brew install gnupg`
+(check out [the notes on how to get gpg 2.1 set up](SETUP.md)).
 
 ## Walkthrough ##
 
@@ -74,7 +74,7 @@ Get your public SSH key with:
 ```sh
 # With GPGTools
 gpgkey2ssh E22FE7692F473FA12F2BAB164046979C50C10E97
-# With gpg21
+# With gpg 2.1
 gpg2 --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
 ```
 Add it to wherever you want to authenticate with your GPG authentication key.
