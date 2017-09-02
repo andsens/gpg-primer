@@ -5,10 +5,9 @@ The intended audience is people using a [YubiKey](https://www.yubico.com/product
 or other smartcard.
 
 ## Dependencies ##
-The only dependency is the GPG Suite from [gpgtools.org](https://gpgtools.org/).  
-Alternatively you can install "GnuPG modern", which is the 2.1 version
-and includes major improvements (but no deep macOS integration) with
-`brew install gnupg` (check out [the notes on how to get gpg 2.1 set up](SETUP-2.1.md)).
+The only dependency is GnuPG modern. Install it with `brew install gnupg` and
+make sure to check out [the notes on how to setup GnuPG](SETUP.md) before
+continuing.
 
 ## Resources ##
 
@@ -17,7 +16,7 @@ and includes major improvements (but no deep macOS integration) with
 The two primary sources for this guide.
 
 [Yubikey, GnuPG 2.1 Modern, and SSH on macOS](https://www.rempe.us/blog/yubikey-gnupg-2-1-and-ssh/)  
-The source for [SETUP-2.1.md](SETUP-2.1.md).
+The source for [SETUP.md](SETUP.md).
 
 [drduh/YubiKey-Guide](https://github.com/drduh/YubiKey-Guide)  
 Extensive guide on how to get GnuPG working with your YubiKey
@@ -65,7 +64,7 @@ $ export GNUPGHOME=$PWD/secure/gnupg-home
 
 # Add a photo to your key, copy the encryption key to your smartcard
 # and sign the authentication & signing keys with your master key
-$ gpg2 --edit-key E22FE7692F473FA12F2BAB164046979C50C10E97
+$ gpg --edit-key E22FE7692F473FA12F2BAB164046979C50C10E97
 
 # Once all keys have been created, back them up
 $ ./backup.sh E22FE7692F473FA12F2BAB164046979C50C10E97
@@ -78,7 +77,7 @@ $ cp -r secure/backup /Volumes/encrypted-storage
 
 # Import all public keys into your regular GPG keychain
 $ unset GNUPGHOME
-$ gpg2 --import secure/backup/E22FE7692F473FA12F2BAB164046979C50C10E97.public.asc
+$ gpg --import secure/backup/E22FE7692F473FA12F2BAB164046979C50C10E97.public.asc
 
 # Done! Kill the secure directory
 $ sudo ./destroy-secure-dir.sh
@@ -93,32 +92,30 @@ Disk /dev/disk2 ejected
 
 ### SSH auth ###
 
-Check out [SETUP-2.1.md](SETUP-2.1.md) on how to get the gpg-agent running on
-macOS when you are using GnuPG 2.1.
+Check out [SETUP.md](SETUP.md) on how to get the gpg-agent running on macOS.
 
 Get your public SSH key with:
 ```sh
 # With GPGTools
 gpgkey2ssh E22FE7692F473FA12F2BAB164046979C50C10E97
 # With gpg 2.1
-gpg2 --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
+gpg --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
 ```
 Add it to wherever you want to authenticate with your GPG authentication key.
 
-### GitHub commit signing ###
-
-Export your public key with:
-```sh
-gpg2 --armor --export E22FE7692F473FA12F2BAB164046979C50C10E97
-```
-
-And paste it into into the GPG field on https://github.com/settings/keys
-
-### git config ###
+### git signing ###
 
 * `commit.gpgSign = true`: Always sign commits
 * `push.gpgSign = if-asked`: Enable signing of pushes
-* `gpg.program = gpg2`: ... instead of `gpg`
+
+### GitHub commit signature verification ###
+
+Export your public key with:
+```sh
+gpg --armor --export E22FE7692F473FA12F2BAB164046979C50C10E97
+```
+
+And paste it into into the GPG field on https://github.com/settings/keys
 
 ### Fallback private key ###
 

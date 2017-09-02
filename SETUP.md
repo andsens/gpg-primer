@@ -1,6 +1,6 @@
-# macOS Sierra gpg 2.1 setup #
+# macOS Sierra GnuPG modern setup #
 
-In order to install GPG 2.1 on macOS and get it running with SSH only a few
+In order to install GnuPG modern on macOS and get it running with SSH only a few
 things are required:
 
 ## Software installation ##

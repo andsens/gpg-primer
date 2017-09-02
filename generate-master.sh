@@ -27,7 +27,7 @@ export GNUPGHOME="$SECUREDIR/gnupg-home"
 (umask 077; mkdir -p "$GNUPGHOME")
 
 log 'Generating master key and encryption subkey for "%s" <%s>' "$key_name" "$key_email"
-gpg_output=$(gpg2 --command-fd 0 --status-fd 2 --no-tty \
+gpg_output=$(gpg --command-fd 0 --status-fd 2 --no-tty \
     --gen-key --batch 2>&1 << EOF
 %no-protection
 Key-Type: RSA
