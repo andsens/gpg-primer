@@ -22,14 +22,15 @@ The source for [SETUP.md](SETUP.md).
 Extensive guide on how to get GnuPG working with your YubiKey
 
 ## Walkthrough ##
-You will be creating a secure directory that is exempt from spotlight indexing
-and general system access and only readable by you.  
+You will be creating a secure directory that is exempt from spotlight indexing,
+general system access; it is only readable by you.  
 This is the poor man's version of an airgapped machine.
 
 Inside that secure directory you will be creating a masterkey and an encryption
-key. You will need to back these keys up to some secure storage
-(e.g. [VeraCrypt](https://www.veracrypt.fr/en/Home.html)), just remember to keep
-backups of your backups, _USB keys are not a reliable storage medium_.
+key. You will need to back these keys up to some secure storage, since the keys
+are unencrypted (e.g. [VeraCrypt](https://www.veracrypt.fr/en/Home.html)).  
+Just remember to keep backups of your backups, _USB flash drives are not a
+reliable storage medium_ (unless they are using SLC tech).
 
 Only run the commands with the `$` in front. The rest is output, so you can see
 where you went wrong if something doesn't work.
