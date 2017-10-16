@@ -15,20 +15,23 @@ if [[ $(id -u) != 0 || -z $SUDO_USER || -z $SUDO_UID || -z $SUDO_GID ]]; then
 fi
 
 function log {
-    local msg="\e[34m${1}%s\e[0m\n"
+    local msg="\e[34m${1}\e[0m\n"
     shift
     # shellcheck disable=SC2059
     printf "$msg" "$@"
 }
 
 undo=""
-trap 'eval "$undo"' ERR EXIT
+trap 'printf "\e[31mAn error occurred. Press <ENTER> to undo previous operations\e[0m"
+read -r
+eval "$undo"' ERR
 
 volname=${1:-secure}
 mountpoint="$PWD/$volname"
+size=$((16*2096))
 
 log "Creating ramdisk"
-ramdisk_path=$(hdik -nomount ram://2048)
+ramdisk_path=$(hdik -nomount "ram://$size")
 # hdik outputs trailing spaces and tabs for some reason
 ramdisk_path=${ramdisk_path//[[:space:]]}
 
@@ -88,6 +91,6 @@ rmdir '$mountpoint' && \\
 diskutil eject '$ramdisk_path'
 EOF
 
-undo=""
+trap "" ERR
 log "\nSecure directory created at \`%s'." "$mountpoint"
 log "The directory can be destroyed with ./destroy-secure-dir.sh"
