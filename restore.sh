@@ -21,3 +21,4 @@ export GNUPGHOME="$SECUREDIR/gnupg-home"
 
 gpg --import "$BACKUPDIR/$key_id.public.asc"
 gpg --import "$BACKUPDIR/$key_id.private.asc"
+gpg --import "$BACKUPDIR/$key_id.private-subkeys.asc"
