@@ -97,9 +97,6 @@ Check out [SETUP.md](SETUP.md) on how to get the gpg-agent running on macOS.
 
 Get your public SSH key with:
 ```sh
-# With GPGTools
-gpgkey2ssh E22FE7692F473FA12F2BAB164046979C50C10E97
-# With gpg 2.1
 gpg --export-ssh-key E22FE7692F473FA12F2BAB164046979C50C10E97
 ```
 Add it to wherever you want to authenticate with your GPG authentication key.
