@@ -20,4 +20,3 @@ export GNUPGHOME="$SECUREDIR/gnupg-home"
 (umask 077; mkdir -p "$GNUPGHOME")
 
 gpg --import "$EXPORTDIR/$key_id.private.asc"
-gpg --import "$EXPORTDIR/$key_id.private-subkeys.asc"
