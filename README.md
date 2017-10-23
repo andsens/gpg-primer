@@ -68,17 +68,17 @@ $ export GNUPGHOME=$PWD/secure/gnupg-home
 $ gpg --edit-key E22FE7692F473FA12F2BAB164046979C50C10E97
 
 # Once all keys have been created, back them up
-$ ./backup.sh E22FE7692F473FA12F2BAB164046979C50C10E97
-Backing up private keys
-Backing up public keys
+$ ./export.sh E22FE7692F473FA12F2BAB164046979C50C10E97
+Exporting private keys
+Exporting public keys
 Generating revocation certificate
 
 # Store the backup in a safe place
-$ cp -r secure/backup /Volumes/encrypted-storage
+$ cp -r secure/export /Volumes/encrypted-storage
 
 # Import all public keys into your regular GPG keychain
 $ unset GNUPGHOME
-$ gpg --import secure/backup/E22FE7692F473FA12F2BAB164046979C50C10E97.public.asc
+$ gpg --import secure/export/E22FE7692F473FA12F2BAB164046979C50C10E97.public.asc
 
 # Done! Kill the secure directory
 $ sudo ./destroy-secure-dir.sh

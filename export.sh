@@ -2,8 +2,8 @@
 set -e
 
 if [[ -z $1 || "$1" == '-h' || "$1" == '--help' ]]; then
-    printf "Backup your GPG key\n\n"
-    printf "Usage: backup.sh KEYID [SECUREDIR] [BACKUPDIR]\n"
+    printf "Export your GPG keys to unencrypted files\n\n"
+    printf "Usage: export.sh KEYID [SECUREDIR] [EXPORTDIR]\n"
     exit 1
 fi
 
@@ -16,7 +16,7 @@ function log {
 
 key_id=$1
 SECUREDIR=${2:-secure}
-BACKUPDIR=${3:-$SECUREDIR/backup}
+EXPORTDIR=${3:-$SECUREDIR/export}
 
 if [[ ! -d $SECUREDIR ]]; then
     printf "\`%s' does not exist\n" "$SECUREDIR"
@@ -24,21 +24,21 @@ if [[ ! -d $SECUREDIR ]]; then
 fi
 
 export GNUPGHOME="$SECUREDIR/gnupg-home"
-(umask 077; mkdir -p "$BACKUPDIR")
+(umask 077; mkdir -p "$EXPORTDIR")
 
-log "Backing up private keys"
-gpg --armor --output "$BACKUPDIR/$key_id.private.asc" --export-secret-keys "$key_id"
-gpg --armor --output "$BACKUPDIR/$key_id.private-subkeys.asc" --export-secret-subkeys "$key_id"
+log "Exporting private keys"
+gpg --armor --output "$EXPORTDIR/$key_id.private.asc" --export-secret-keys "$key_id"
+gpg --armor --output "$EXPORTDIR/$key_id.private-subkeys.asc" --export-secret-subkeys "$key_id"
 
-log "Backing up public keys"
-gpg --armor --output "$BACKUPDIR/$key_id.public.asc" --export "$key_id"
+log "Exporting public keys"
+gpg --armor --output "$EXPORTDIR/$key_id.public.asc" --export "$key_id"
 
 
 log "Generating revocation certificate"
-revcert_path="$BACKUPDIR/$key_id-revocation-certificate.asc"
+revcert_path="$EXPORTDIR/$key_id-revocation-certificate.asc"
 [[ -e "$revcert_path" ]] && mv "$revcert_path" "$revcert_path.bak"
 gpg --command-fd 0 --status-fd 2 --no-tty \
-    --armor --output "$BACKUPDIR/$key_id-revocation-certificate.asc" \
+    --armor --output "$EXPORTDIR/$key_id-revocation-certificate.asc" \
     --gen-revoke "$key_id" 2>/dev/null << EOF
 y
 0
