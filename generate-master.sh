@@ -37,7 +37,7 @@ Name-Real: $key_name
 Name-Email: $key_email
 Expire-Date: 1y
 Subkey-Type: RSA
-Subkey-Length: 2048
+Subkey-Length: 4096
 Subkey-Usage: encrypt
 %commit
 EOF
