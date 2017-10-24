@@ -28,7 +28,7 @@ export GNUPGHOME="$SECUREDIR/gnupg-home"
 
 log "Exporting private keys"
 gpg --armor --output "$EXPORTDIR/$key_id.private.asc" \
-    --export-options export-backup --export-secret-keys "$key_id!"
+    --export-options export-backup --export-secret-keys "$key_id"
 
 log "Exporting public keys"
 gpg --armor --output "$EXPORTDIR/$key_id.public.asc" --export "$key_id"
