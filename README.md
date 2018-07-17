@@ -128,3 +128,12 @@ private key auth.
 ```
 no-pty,no-X11-forwarding,permitopen="127.0.0.1:5432",command="/bin/echo do-not-send-commands" ssh-rsa private_key jd+postgres-only@example.com
 ```
+
+### Lock screen on YubiKey removal
+
+@shtirlic made a nifty little tool called (yubikeylockd)[https://github.com/shtirlic/yubikeylockd]
+that locks the screen automatically when a YubiKey is removed from its USB port.  
+Install it with `brew install https://raw.githubusercontent.com/shtirlic/yubikeylockd/master/yubikeylockd.rb`  
+and enable with `sudo brew services start yubikeylockd`.
+
+The screen also wakes up when the key is plugged in again!
