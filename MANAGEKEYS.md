@@ -243,6 +243,7 @@ gpg: OpenPGP card no. D0123456789012345678901234567890 detected
 4 - set the Reset Code
 Q - quit
 
+# The default PIN is 123456
 Your selection? 1
 PIN changed.
 
@@ -252,6 +253,7 @@ PIN changed.
 4 - set the Reset Code
 Q - quit
 
+# The default admin PIN is 12345678
 Your selection? 3
 PIN changed.
 
@@ -261,6 +263,7 @@ PIN changed.
 4 - set the Reset Code
 Q - quit
 
+# The reset key is not ser per default
 Your selection? 4
 Reset Code set.
 
