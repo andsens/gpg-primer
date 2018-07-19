@@ -6,8 +6,8 @@ or other smartcard.
 
 ## Dependencies
 
-The only dependency is GnuPG modern. Install it with `brew install gnupg` and
-make sure to check out [the notes on how to setup GnuPG](SETUP.md) before
+The only dependency is GPG Suite. Install it with `brew cask install gpg-suite`
+and make sure to check out [the notes on how to setup GnuPG](SETUP.md) before
 continuing.
 
 ## Resources
