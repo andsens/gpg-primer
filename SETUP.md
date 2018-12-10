@@ -68,7 +68,7 @@ SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 In order for `$SSH_AUTH_SOCK` not to be overwritten you will need to disable
 the macOS ssh-agent that is automatically started at boot.  
 (Un-)fortunately System Integrity Protection prevents you from just running
-`sudo launchctl unload -w /System/Library/LaunchAgents/com.openssh.ssh-agent.plist`.
+`launchctl unload -w /System/Library/LaunchAgents/com.openssh.ssh-agent.plist`.
 You will need to boot into your Recovery OS (hold Cmd+R at boot) and run
 `csrutil disable`, then boot normally, run the `unload` command and then
 run `csrutil enable` in the Recovery OS.
